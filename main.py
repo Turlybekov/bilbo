@@ -1,5 +1,5 @@
 # This is a sample Python script.
-
+import pytest
 # Press ⌃R to execute it or replace it with your code.
 # Press Double ⇧ to search everywhere for classes, files, tool windows, actions, and settings.
 
@@ -25,12 +25,16 @@ def fetch_swapi_data():
 
 # Press the green button in the gutter to run the script.
 if __name__ == '__main__':
-    fetch_swapi_data()
-    print(f'Printing ENV file Base URL: {settings.base_url}')
+    # fetch_swapi_data()
+    # print(f'Printing ENV file Base URL: {settings.base_url}')
     movie = MovieClient()
     all_movies = movie.get_all_movies()
-    for movie in all_movies:
-        if movie.release_date.year < 1980:
-            print(movie)
+    print(all_movies.status_code)
+    print(all_movies.headers)
+    print(all_movies.links)
+    # all_movies = [Movie(**movie) for movie in all_movies]
+    # for movie in all_movies:
+    #     if movie.release_date.year < 1980:
+    #         print(movie)
 
 # See PyCharm help at https://www.jetbrains.com/help/pycharm/

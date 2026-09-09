@@ -1,10 +1,6 @@
-from typing import List
-from urllib import request
-
 import requests
 
 from src.clients.base_client import BaseApiClient
-from src.models.movie import Movie
 
 
 class MovieClient(BaseApiClient):
