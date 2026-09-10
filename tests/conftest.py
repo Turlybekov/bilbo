@@ -92,7 +92,7 @@ def all_persons(person_client):
 
 
 @pytest.fixture(scope="session")
-def person_by_id(person_client, person_id):
+def person_by_id(person_client):
     def get_person(person_id):
         with allure.step('Get person by id'):
             person = person_client.get_person_by_id(person_id)
