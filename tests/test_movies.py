@@ -1,7 +1,7 @@
 import allure
 import pytest
 
-from src.helpers.asssert_with import assert_with
+from src.helpers.assert_with import assert_with
 from src.models.movie import Movie
 from tests.data.movie import MOVIE_DATA
 
@@ -19,7 +19,6 @@ def test_movie_list_not_empty(all_movies):
 @allure.feature("Star wars")
 @allure.story("Movie")
 @allure.title("Check movie names")
-@allure.testcase("Check Movie Name")
 @pytest.mark.parametrize('movie_id ,episode_name', MOVIE_DATA)
 def test_movie_name(movie_by_id, movie_id, episode_name):
     response = Movie(**movie_by_id(movie_id))
@@ -29,7 +28,6 @@ def test_movie_name(movie_by_id, movie_id, episode_name):
 @allure.feature("Star wars")
 @allure.story("Movie")
 @allure.title("Get Movie by ID")
-@allure.testcase("Check Movie Name")
 def test_movie_by_id(movie_by_id):
     movie_id = 3
     response = Movie(**movie_by_id(movie_id))

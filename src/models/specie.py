@@ -12,7 +12,7 @@ class Specie(BaseModel):
     hair_colors: str
     eye_colors: str
     average_lifespan: str
-    homeworld: str
+    homeworld: str | None
     language: str
     people: list[str]
     films: list[str]

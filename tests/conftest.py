@@ -10,7 +10,7 @@ from src.clients.planet_client import PlanetClient
 from src.clients.specie_client import SpecieClient
 from src.clients.starship_client import StarshipClient
 from src.clients.vehicle_client import VehicleClient
-from src.helpers.asssert_with import assert_with
+from src.helpers.assert_with import assert_with
 
 
 @pytest.fixture(scope="session")
