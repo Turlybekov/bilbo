@@ -1,0 +1,79 @@
+name: Tests with Allure Report
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+  workflow_dispatch:
+
+permissions:
+  contents: write   # нужно, чтобы запушить отчёт в ветку gh-pages
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      # ВАЖНО: тут НЕТ continue-on-error.
+      # Если тесты упадут, job корректно окрасится в красный,
+      # а следующие шаги всё равно выполнятся благодаря if: always()
+      # --alluredir не указываем явно: он уже задан в pytest.ini (addopts)
+      # и указывает на reports/allure-results
+      - name: Run tests
+        run: pytest
+
+      # Подтягиваем предыдущий отчёт из gh-pages, чтобы Allure
+      # мог построить графики истории/трендов.
+      # continue-on-error нужен на случай первого запуска,
+      # когда ветки gh-pages ещё не существует.
+      - name: Load previous report (for history/trends)
+        if: always()
+        continue-on-error: true
+        uses: actions/checkout@v4
+        with:
+          ref: gh-pages
+          path: gh-pages
+
+      - name: Build Allure report
+        if: always()
+        uses: simple-elf/allure-report-action@master
+        with:
+          allure_results: reports/allure-results
+          allure_history: allure-history
+          allure_report: allure-report
+          keep_reports: 20
+
+      - name: Publish report to GitHub Pages
+        if: always()
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_branch: gh-pages
+          publish_dir: allure-history
+
+      - name: Send Telegram notification
+        if: always()
+        uses: appleboy/telegram-action@master
+        with:
+          to: ${{ secrets.TELEGRAM_CHAT_ID }}
+          token: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          message: |
+            Статус прогона: ${{ job.status }}
+            Репозиторий: ${{ github.repository }}
+            Ветка/PR: ${{ github.ref_name }}
+            Коммит: ${{ github.sha }}
+            Отчёт (Allure): https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}/${{ github.run_number }}/
