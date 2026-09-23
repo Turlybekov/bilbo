@@ -1,0 +1,226 @@
+[
+  {
+    "name": "X-wing",
+    "model": "T-65 X-wing",
+    "manufacturer": "Incom Corporation",
+    "cost_in_credits": "149999",
+    "length": "12.5",
+    "max_atmosphering_speed": "1050",
+    "crew": "1",
+    "passengers": "0",
+    "cargo_capacity": "110",
+    "consumables": "1 week",
+    "hyperdrive_rating": "1.0",
+    "MGLT": "100",
+    "starship_class": "Starfighter",
+    "pilots": [
+      "https://swapi.info/api/people/1",
+      "https://swapi.info/api/people/9",
+      "https://swapi.info/api/people/18",
+      "https://swapi.info/api/people/19"
+    ],
+    "films": [
+      "https://swapi.info/api/films/1",
+      "https://swapi.info/api/films/2",
+      "https://swapi.info/api/films/3"
+    ],
+    "created": "2014-12-12T11:19:05.340000Z",
+    "edited": "2014-12-20T21:23:49.886000Z",
+    "url": "https://swapi.info/api/starships/12"
+  },
+  {
+    "name": "TIE Advanced x1",
+    "model": "Twin Ion Engine Advanced x1",
+    "manufacturer": "Sienar Fleet Systems",
+    "cost_in_credits": "unknown",
+    "length": "9.2",
+    "max_atmosphering_speed": "1200",
+    "crew": "1",
+    "passengers": "0",
+    "cargo_capacity": "150",
+    "consumables": "5 days",
+    "hyperdrive_rating": "1.0",
+    "MGLT": "105",
+    "starship_class": "Starfighter",
+    "pilots": [
+      "https://swapi.info/api/people/4"
+    ],
+    "films": [
+      "https://swapi.info/api/films/1"
+    ],
+    "created": "2014-12-12T11:21:32.991000Z",
+    "edited": "2014-12-20T21:23:49.889000Z",
+    "url": "https://swapi.info/api/starships/13"
+  },
+  {
+    "name": "A-wing",
+    "model": "RZ-1 A-wing Interceptor",
+    "manufacturer": "Alliance Underground Engineering, Incom Corporation",
+    "cost_in_credits": "175000",
+    "length": "9.6",
+    "max_atmosphering_speed": "1300",
+    "crew": "1",
+    "passengers": "0",
+    "cargo_capacity": "40",
+    "consumables": "1 week",
+    "hyperdrive_rating": "1.0",
+    "MGLT": "120",
+    "starship_class": "Starfighter",
+    "pilots": [
+      "https://swapi.info/api/people/29"
+    ],
+    "films": [
+      "https://swapi.info/api/films/3"
+    ],
+    "created": "2014-12-18T11:16:34.542000Z",
+    "edited": "2014-12-20T21:23:49.907000Z",
+    "url": "https://swapi.info/api/starships/28"
+  },
+  {
+    "name": "B-wing",
+    "model": "A/SF-01 B-wing starfighter",
+    "manufacturer": "Slayn & Korpil",
+    "cost_in_credits": "220000",
+    "length": "16.9",
+    "max_atmosphering_speed": "950",
+    "crew": "1",
+    "passengers": "0",
+    "cargo_capacity": "45",
+    "consumables": "1 week",
+    "hyperdrive_rating": "2.0",
+    "MGLT": "91",
+    "starship_class": "Assault Starfighter",
+    "pilots": [],
+    "films": [
+      "https://swapi.info/api/films/3"
+    ],
+    "created": "2014-12-18T11:18:04.763000Z",
+    "edited": "2014-12-20T21:23:49.909000Z",
+    "url": "https://swapi.info/api/starships/29"
+  },
+  {
+    "name": "Naboo fighter",
+    "model": "N-1 starfighter",
+    "manufacturer": "Theed Palace Space Vessel Engineering Corps",
+    "cost_in_credits": "200000",
+    "length": "11",
+    "max_atmosphering_speed": "1100",
+    "crew": "1",
+    "passengers": "0",
+    "cargo_capacity": "65",
+    "consumables": "7 days",
+    "hyperdrive_rating": "1.0",
+    "MGLT": "unknown",
+    "starship_class": "Starfighter",
+    "pilots": [
+      "https://swapi.info/api/people/11",
+      "https://swapi.info/api/people/35",
+      "https://swapi.info/api/people/60"
+    ],
+    "films": [
+      "https://swapi.info/api/films/4",
+      "https://swapi.info/api/films/5"
+    ],
+    "created": "2014-12-19T17:39:17.582000Z",
+    "edited": "2014-12-20T21:23:49.917000Z",
+    "url": "https://swapi.info/api/starships/39"
+  },
+  {
+    "name": "Jedi starfighter",
+    "model": "Delta-7 Aethersprite-class interceptor",
+    "manufacturer": "Kuat Systems Engineering",
+    "cost_in_credits": "180000",
+    "length": "8",
+    "max_atmosphering_speed": "1150",
+    "crew": "1",
+    "passengers": "0",
+    "cargo_capacity": "60",
+    "consumables": "7 days",
+    "hyperdrive_rating": "1.0",
+    "MGLT": "unknown",
+    "starship_class": "Starfighter",
+    "pilots": [
+      "https://swapi.info/api/people/10",
+      "https://swapi.info/api/people/58"
+    ],
+    "films": [
+      "https://swapi.info/api/films/5",
+      "https://swapi.info/api/films/6"
+    ],
+    "created": "2014-12-20T17:35:23.906000Z",
+    "edited": "2014-12-20T21:23:49.930000Z",
+    "url": "https://swapi.info/api/starships/48"
+  },
+  {
+    "name": "Jedi Interceptor",
+    "model": "Eta-2 Actis-class light interceptor",
+    "manufacturer": "Kuat Systems Engineering",
+    "cost_in_credits": "320000",
+    "length": "5.47",
+    "max_atmosphering_speed": "1500",
+    "crew": "1",
+    "passengers": "0",
+    "cargo_capacity": "60",
+    "consumables": "2 days",
+    "hyperdrive_rating": "1.0",
+    "MGLT": "unknown",
+    "starship_class": "starfighter",
+    "pilots": [
+      "https://swapi.info/api/people/10",
+      "https://swapi.info/api/people/11"
+    ],
+    "films": [
+      "https://swapi.info/api/films/6"
+    ],
+    "created": "2014-12-20T19:56:57.468000Z",
+    "edited": "2014-12-20T21:23:49.951000Z",
+    "url": "https://swapi.info/api/starships/65"
+  },
+  {
+    "name": "Belbullab-22 starfighter",
+    "model": "Belbullab-22 starfighter",
+    "manufacturer": "Feethan Ottraw Scalable Assemblies",
+    "cost_in_credits": "168000",
+    "length": "6.71",
+    "max_atmosphering_speed": "1100",
+    "crew": "1",
+    "passengers": "0",
+    "cargo_capacity": "140",
+    "consumables": "7 days",
+    "hyperdrive_rating": "6",
+    "MGLT": "unknown",
+    "starship_class": "starfighter",
+    "pilots": [
+      "https://swapi.info/api/people/10",
+      "https://swapi.info/api/people/79"
+    ],
+    "films": [
+      "https://swapi.info/api/films/6"
+    ],
+    "created": "2014-12-20T20:38:05.031000Z",
+    "edited": "2014-12-20T21:23:49.959000Z",
+    "url": "https://swapi.info/api/starships/74"
+  },
+  {
+    "name": "V-wing",
+    "model": "Alpha-3 Nimbus-class V-wing starfighter",
+    "manufacturer": "Kuat Systems Engineering",
+    "cost_in_credits": "102500",
+    "length": "7.9",
+    "max_atmosphering_speed": "1050",
+    "crew": "1",
+    "passengers": "0",
+    "cargo_capacity": "60",
+    "consumables": "15 hours",
+    "hyperdrive_rating": "1.0",
+    "MGLT": "unknown",
+    "starship_class": "starfighter",
+    "pilots": [],
+    "films": [
+      "https://swapi.info/api/films/6"
+    ],
+    "created": "2014-12-20T20:43:04.349000Z",
+    "edited": "2014-12-20T21:23:49.961000Z",
+    "url": "https://swapi.info/api/starships/75"
+  }
+]
