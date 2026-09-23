@@ -62,6 +62,10 @@ jobs:
           allure_report: allure-report
           keep_reports: 20
 
+      - name: Remove leftover .git inside allure-history
+        if: always()
+        run: sudo rm -rf allure-history/.git
+
       - name: Set default git branch name for gh-pages
         if: always()
         run: git config --global init.defaultBranch gh-pages
