@@ -48,14 +48,23 @@ jobs:
           ref: gh-pages
           path: gh-pages
 
+      - name: Ensure gh-pages folder exists
+        if: always()
+        run: mkdir -p gh-pages
+
       - name: Build Allure report
         if: always()
         uses: simple-elf/allure-report-action@master
         with:
           allure_results: reports/allure-results
+          gh_pages: gh-pages
           allure_history: allure-history
           allure_report: allure-report
           keep_reports: 20
+
+      - name: Set default git branch name for gh-pages
+        if: always()
+        run: git config --global init.defaultBranch gh-pages
 
       - name: Publish report to GitHub Pages
         if: always()
