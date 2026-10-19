@@ -1,12 +1,21 @@
+import allure
 from selenium.webdriver.remote.webdriver import WebDriver
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 
 
 class BasePage:
-    def __init__(self, driver: WebDriver):
+    def __init__(self, driver: WebDriver, timeout: int = 10):
         self.driver = driver
-        self.wait = WebDriverWait(driver, 10)
+        self.wait = WebDriverWait(driver, timeout)
+
+    def take_screenshot(self, name="Screenshot"):
+        """Captures a screenshot and attaches it directly to the Allure report."""
+        allure.attach(
+            self.driver.get_screenshot_as_png(),
+            name=name,
+            attachment_type=allure.attachment_type.PNG
+        )
 
     def open(self, url: str):
         self.driver.get(url)

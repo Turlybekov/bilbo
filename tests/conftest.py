@@ -17,8 +17,12 @@ from src.helpers.assert_with import assert_with
 def browser():
     with allure.step("Open Browser in headless mode"):
         options = webdriver.ChromeOptions()
-        options.add_argument("--headless")
+        # options.add_argument("--headless")
+        options.add_argument("--headless=new")  # Use correct headless flag
+        # Set the default window dimensions:
+        options.add_argument("--window-size=1920,1080")
         driver = webdriver.Chrome(options=options)
+        driver.maximize_window()
         yield driver
         driver.close()
 
