@@ -24,9 +24,9 @@ def test_person_in_list(all_persons):
 
 @allure.feature("Star wars")
 @allure.story("Persons")
-@allure.title("Check Person name  and birth year")
 @pytest.mark.parametrize('person_id, person_name, birth_year', PERSON_DATA)
 def test_person_in_list(person_by_id, person_id, person_name, birth_year):
+    allure.dynamic.title(f"Check Person name is {person_name} and birth year is {birth_year}")
     person = Person(**person_by_id(person_id))
     assert_with(person.name == person_name, f'Expected person name: {person_name}, actual: {person.name}')
     assert_with(person.birth_year == birth_year,

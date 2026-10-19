@@ -17,9 +17,10 @@ def test_starships_list_not_empty(all_starships):
 
 @allure.feature("Star wars")
 @allure.story("Starships")
-@allure.title("Check starship with single crew member and 0 passengers quantity more than n")
 @pytest.mark.parametrize('starship_quantity', [1, 2, 3, 4, 5, 6, 7, 8, 9, 10])
 def test_starships_with_single_crew(all_starships, starship_quantity):
+    allure.dynamic.title(
+        f"Check that list contains {starship_quantity} or more ships with only 1 crew member and none of passengers")
     starships = [Starship(**s) for s in all_starships if Starship(**s).crew == '1' and Starship(**s).passengers == '0']
     assert_with(len(starships) >= starship_quantity,
                 f'Expected starships with only 1 crew members and no passengers is equal or more than: {starship_quantity}, actual: {len(starships)}')
