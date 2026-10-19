@@ -2,7 +2,7 @@ import json
 
 import allure
 import pytest
-from pydantic import BaseModel
+from selenium import webdriver
 
 from src.clients.movie_client import MovieClient
 from src.clients.person_client import PersonClient
@@ -11,6 +11,16 @@ from src.clients.specie_client import SpecieClient
 from src.clients.starship_client import StarshipClient
 from src.clients.vehicle_client import VehicleClient
 from src.helpers.assert_with import assert_with
+
+
+@pytest.fixture(scope="session")
+def browser():
+    with allure.step("Open Browser in headless mode"):
+        options = webdriver.ChromeOptions()
+        options.add_argument("--headless")
+        driver = webdriver.Chrome(options=options)
+        yield driver
+        driver.close()
 
 
 @pytest.fixture(scope="session")
