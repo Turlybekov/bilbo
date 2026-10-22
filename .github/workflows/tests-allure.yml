@@ -66,10 +66,6 @@ jobs:
         if: always()
         run: sudo rm -rf allure-history/.git
 
-      - name: Set default git branch name for gh-pages
-        if: always()
-        run: git config --global init.defaultBranch gh-pages
-
       - name: Publish report to GitHub Pages
         if: always()
         uses: peaceiris/actions-gh-pages@v4
