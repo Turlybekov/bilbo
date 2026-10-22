@@ -23,6 +23,12 @@ jobs:
         with:
           python-version: '3.11'
 
+      - name: Set up Java for Allure
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: '17'
+
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
@@ -52,19 +58,46 @@ jobs:
         if: always()
         run: mkdir -p gh-pages
 
+      # Запускаем Allure CLI непосредственно на runner, а не через Docker-action.
+      # Это исключает загрузку базового образа из public.ecr.aws, которая может
+      # завершаться ошибкой 429 (rate limit).
       - name: Build Allure report
         if: always()
-        uses: simple-elf/allure-report-action@master
-        with:
-          allure_results: reports/allure-results
-          gh_pages: gh-pages
-          allure_history: allure-history
-          allure_report: allure-report
-          keep_reports: 20
+        env:
+          ALLURE_VERSION: 2.44.0
+          REPORT_URL: https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}
+        run: |
+          curl --fail --location --retry 3 \
+            --output /tmp/allure.tgz \
+            "https://repo.maven.apache.org/maven2/io/qameta/allure/allure-commandline/${ALLURE_VERSION}/allure-commandline-${ALLURE_VERSION}.tgz"
+          tar -xzf /tmp/allure.tgz -C /tmp
+          export PATH="/tmp/allure-${ALLURE_VERSION}/bin:${PATH}"
 
-      - name: Remove leftover .git inside allure-history
-        if: always()
-        run: sudo rm -rf allure-history/.git
+          mkdir -p allure-history
+          if [ -d gh-pages ]; then
+            cp -a gh-pages/. allure-history/
+          fi
+          rm -rf allure-history/.git
+
+          if [ -d gh-pages/last-history ]; then
+            mkdir -p reports/allure-results/history
+            cp -a gh-pages/last-history/. reports/allure-results/history/
+          fi
+
+          printf '{"name":"GitHub Actions","type":"github","reportName":"Allure Report with history","url":"%s","reportUrl":"%s/%s","buildUrl":"%s/%s/actions/runs/%s","buildName":"GitHub Actions Run #%s","buildOrder":"%s"}\n' \
+            "$REPORT_URL" "$REPORT_URL" "$GITHUB_RUN_NUMBER" "$GITHUB_SERVER_URL" "$GITHUB_REPOSITORY" "$GITHUB_RUN_ID" "$GITHUB_RUN_ID" "$GITHUB_RUN_NUMBER" \
+            > reports/allure-results/executor.json
+
+          allure generate --clean reports/allure-results -o allure-report
+          mkdir -p "allure-history/${GITHUB_RUN_NUMBER}" allure-history/last-history
+          cp -a allure-report/. "allure-history/${GITHUB_RUN_NUMBER}/"
+          cp -a allure-report/history/. allure-history/last-history/
+
+          mapfile -t reports < <(find allure-history -mindepth 1 -maxdepth 1 -type d -printf '%f\n' | sort -n)
+          while [ "${#reports[@]}" -gt 20 ]; do
+            rm -rf "allure-history/${reports[0]}"
+            reports=("${reports[@]:1}")
+          done
 
       - name: Publish report to GitHub Pages
         if: always()
