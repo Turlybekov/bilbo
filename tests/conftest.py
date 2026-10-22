@@ -2,7 +2,6 @@ import json
 
 import allure
 import pytest
-from selenium import webdriver
 
 from src.clients.movie_client import MovieClient
 from src.clients.person_client import PersonClient
@@ -14,53 +13,45 @@ from src.helpers.assert_with import assert_with
 
 
 @pytest.fixture(scope="session")
-def browser():
-    with allure.step("Open Browser in headless mode"):
-        options = webdriver.ChromeOptions()
-        # options.add_argument("--headless")
-        options.add_argument("--headless=new")  # Use correct headless flag
-        # Set the default window dimensions:
-        options.add_argument("--window-size=1920,1080")
-        driver = webdriver.Chrome(options=options)
-        driver.maximize_window()
-        yield driver
-        driver.close()
-
-
-@pytest.fixture(scope="session")
 def movie_client():
     client = MovieClient()
-    return client
+    yield client
+    client.session.close()
 
 
 @pytest.fixture(scope="session")
 def person_client():
     client = PersonClient()
-    return client
+    yield client
+    client.session.close()
 
 
 @pytest.fixture(scope="session")
 def planet_client():
     client = PlanetClient()
-    return client
+    yield client
+    client.session.close()
 
 
 @pytest.fixture(scope="session")
 def specie_client():
     client = SpecieClient()
-    return client
+    yield client
+    client.session.close()
 
 
 @pytest.fixture(scope="session")
 def starship_client():
     client = StarshipClient()
-    return client
+    yield client
+    client.session.close()
 
 
 @pytest.fixture(scope="session")
 def vehicle_client():
     client = VehicleClient()
-    return client
+    yield client
+    client.session.close()
 
 
 @pytest.fixture(scope="session")
@@ -131,14 +122,14 @@ def all_planets(planet_client):
         allure.attach(json.dumps(json_data, indent=2, ensure_ascii=False),
                       name="List of all planets",
                       attachment_type=allure.attachment_type.JSON)
-    return planets
+    return json_data
 
 
 @pytest.fixture(scope="session")
 def planet_by_id(planet_client):
     def get_planet(planet_id):
         with allure.step('Get planet by id'):
-            planet = planet_client.get_planet_by_id(planet_id).json()
+            planet = planet_client.get_planet_by_id(planet_id)
             assert_with(planet.status_code == 200,
                         f'Expected Response status code is 200, actual: {planet.status_code}')
             json_data = planet.json()

@@ -12,7 +12,6 @@ from tests.data.movie import MOVIE_DATA
 @allure.testcase("Movie Test")
 def test_movie_list_not_empty(all_movies):
     response = [Movie(**movie) for movie in all_movies]
-    print(response)
     assert_with(len(response) > 0, 'Movie list is empty')
 
 
@@ -29,7 +28,8 @@ def test_movie_name(movie_by_id, movie_id, episode_name):
 @allure.story("Movie")
 @allure.title("Get Movie by ID")
 def test_movie_by_id(movie_by_id):
-    movie_id = 3
-    response = Movie(**movie_by_id(movie_id))
-    assert_with(response.episode_id == movie_id,
-                f'Expected movie id: "{movie_id}", actual: "{response.episode_id}"')
+    movie_resource_id = 3
+    expected_episode_id = 6
+    response = Movie(**movie_by_id(movie_resource_id))
+    assert_with(response.episode_id == expected_episode_id,
+                f'Expected episode id: "{expected_episode_id}", actual: "{response.episode_id}"')

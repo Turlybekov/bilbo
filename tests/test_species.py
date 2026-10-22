@@ -25,7 +25,7 @@ def test_specie_classification(specie_by_id):
 @allure.feature("Star wars")
 @allure.story("Species")
 @allure.title("Check specie language to be 'Quermian'")
-def test_specie_classification(specie_by_id):
+def test_specie_language(specie_by_id):
     specie = Specie(**specie_by_id(25))
     assert_with(specie.language == 'Quermian',
-                f'Expected specie language to be "Quermian", actual: {specie.classification}')
+                f'Expected specie language to be "Quermian", actual: {specie.language}')

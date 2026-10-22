@@ -1,7 +1,6 @@
 import json
 
 import allure
-import pytest
 
 from src.helpers.assert_with import assert_with
 from src.models.starship import Starship
@@ -17,13 +16,20 @@ def test_starships_list_not_empty(all_starships):
 
 @allure.feature("Star wars")
 @allure.story("Starships")
-@pytest.mark.parametrize('starship_quantity', [1, 2, 3, 4, 5, 6, 7, 8, 9, 10])
-def test_starships_with_single_crew(all_starships, starship_quantity):
-    allure.dynamic.title(
-        f"Check that list contains {starship_quantity} or more ships with only 1 crew member and none of passengers")
-    starships = [Starship(**s) for s in all_starships if Starship(**s).crew == '1' and Starship(**s).passengers == '0']
-    assert_with(len(starships) >= starship_quantity,
-                f'Expected starships with only 1 crew members and no passengers is equal or more than: {starship_quantity}, actual: {len(starships)}')
+@allure.title("Check count of single-crew starships without passengers")
+def test_single_crew_starships_count(all_starships):
+    expected_quantity = 9
+    starships = [
+        Starship(**starship)
+        for starship in all_starships
+        if starship["crew"] == "1" and starship["passengers"] == "0"
+    ]
+    assert_with(
+        len(starships) == expected_quantity,
+        "Expected exactly "
+        f"{expected_quantity} starships with one crew member and no passengers, "
+        f"actual: {len(starships)}",
+    )
     starships_json = [starship.model_dump(mode='json') for starship in starships]
     allure.attach(json.dumps(starships_json, indent=2), name='Starships with only 1 crew member and 0 passengers',
                   attachment_type=allure.attachment_type.JSON)

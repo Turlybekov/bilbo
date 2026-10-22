@@ -7,9 +7,7 @@ class VehicleClient(BaseApiClient):
     VEHICLES = 'vehicles'
 
     def get_all_vehicles(self) -> requests.Response:
-        response = self.session.get(self._url(self.VEHICLES))
-        return response
+        return self.get(self.VEHICLES)
 
-    def get_vehicle_by_id(self, vehicle_id) -> requests.Response:
-        response = self.session.get(self._url(self.VEHICLES + f'/{vehicle_id}'))
-        return response
+    def get_vehicle_by_id(self, vehicle_id: int) -> requests.Response:
+        return self.get(f"{self.VEHICLES}/{vehicle_id}")
